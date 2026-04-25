@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Materia Brief — Hormuz Shock: Semiconductors & Batteries</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f6f1e7;
+  --ink:#171511;
+  --muted:#686052;
+  --line:#d7cdbc;
+  --card:#fffaf0;
+  --card2:#f0e6d5;
+  --red:#a33d2d;
+  --blue:#255a73;
+  --green:#516f45;
+  --gold:#b37818;
+  --dark:#11100d;
+  --mono:"IBM Plex Mono","SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  --serif:"IBM Plex Serif", Georgia, "Times New Roman", serif;
+  --sans:"IBM Plex Sans KR", -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  line-height:1.72;
+}
+a{color:inherit}
+.topbar{
+  position:sticky;top:0;z-index:50;
+  height:48px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 18px;
+  background:rgba(246,241,231,.92);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.brand{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:17px;
+  letter-spacing:-.02em;
+}
+.issue{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.hero{
+  max-width:1180px;
+  margin:0 auto;
+  padding:68px 24px 34px;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:40px;
+  align-items:end;
+}
+.kicker{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:var(--red);
+  margin-bottom:22px;
+}
+h1{
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:clamp(34px,5.4vw,66px);
+  line-height:.94;
+  letter-spacing:-.055em;
+  margin:0 0 22px;
+}
+.dek{
+  font-family:var(--serif);
+  font-size:clamp(18px,1.8vw,24px);
+  line-height:1.22;
+  color:#3b352c;
+  max-width:780px;
+}
+.meta{
+  display:flex;gap:10px;flex-wrap:wrap;
+  margin-top:26px;
+  font-family:var(--mono);
+  font-size:11px;color:var(--muted);
+}
+.pill{
+  border:1px solid var(--line);
+  padding:5px 9px;
+  border-radius:999px;
+  background:rgba(255,250,240,.55);
+}
+.hero-card{
+  background:var(--dark);
+  color:#f6f1e7;
+  border-radius:22px;
+  padding:24px;
+  min-height:440px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 22px 60px rgba(38,31,20,.18);
+}
+.hero-card:before{
+  content:"";
+  position:absolute;inset:-20%;
+  background:
+    radial-gradient(circle at 20% 30%,rgba(179,120,24,.45),transparent 24%),
+    radial-gradient(circle at 80% 35%,rgba(37,90,115,.55),transparent 22%),
+    radial-gradient(circle at 52% 80%,rgba(163,61,45,.42),transparent 28%);
+  filter:blur(8px);
+}
+.hero-card-content{position:relative;z-index:2}
+.big-num{
+  font-family:var(--serif);
+  font-size:56px;
+  line-height:1;
+  letter-spacing:-.06em;
+  color:#fff2d6;
+}
+.caption{
+  font-size:12px;
+  color:#bcb3a2;
+  max-width:340px;
+}
+.mini-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:26px;
+}
+.mini{
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:16px;
+  padding:14px;
+  background:rgba(255,255,255,.06);
+}
+.mini .lab{
+  font-family:var(--mono);
+  font-size:10px;
+  color:#bcb3a2;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.mini .val{
+  font-family:var(--serif);
+  font-size:23px;
+  margin-top:4px;
+}
+.wrap{
+  max-width:1180px;margin:0 auto;padding:0 24px 80px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:260px minmax(0,1fr);
+  gap:52px;
+  align-items:start;
+}
+.toc{
+  position:sticky;top:72px;
+  border-left:1px solid var(--line);
+  padding-left:16px;
+  color:var(--muted);
+  font-size:13px;
+}
+.toc a{display:block;text-decoration:none;margin:10px 0}
+.toc a:hover{color:var(--ink)}
+.article{
+  max-width:780px;
+}
+.article p{
+  font-size:18px;
+  margin:20px 0;
+}
+.article .lead{
+  font-family:var(--serif);
+  font-size:23px;
+  line-height:1.34;
+  color:#29241d;
+}
+h2{
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:32px;
+  line-height:1.05;
+  letter-spacing:-.035em;
+  margin:70px 0 18px;
+}
+h3{
+  font-family:var(--serif);
+  font-weight:500;
+  font-size:23px;
+  margin:44px 0 12px;
+}
+.dropcap:first-letter{
+  font-family:var(--serif);
+  float:left;
+  font-size:78px;
+  line-height:.85;
+  padding:9px 10px 0 0;
+  color:var(--red);
+}
+.note{
+  border-left:3px solid var(--red);
+  background:rgba(255,250,240,.65);
+  padding:14px 18px;
+  margin:30px 0;
+  font-size:16px;
+  color:#3c352b;
+}
+.full{
+  width:min(1120px, calc(100vw - 48px));
+  margin:54px 0 54px;
+  transform:translateX(max(-260px, calc((780px - min(1120px, calc(100vw - 48px)))/2)));
+}
+.panel{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:22px;
+  box-shadow:0 8px 22px rgba(56,44,25,.06);
+}
+.panel-head{
+  display:flex;
+  justify-content:space-between;
+  gap:18px;
+  align-items:flex-start;
+  margin-bottom:12px;
+}
+.panel-title{
+  font-family:var(--serif);
+  font-size:21px;
+  line-height:1.08;
+  letter-spacing:-.03em;
+}
+.panel-sub{
+  font-size:14px;color:var(--muted);
+  max-width:560px;
+}
+.chart{
+  min-height:420px;
+}
+.controls{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:16px 0 8px;
+}
+.control{
+  background:#f8efe1;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:12px;
+}
+.control label{
+  display:flex;justify-content:space-between;gap:10px;
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--muted);
+  margin-bottom:7px;
+}
+input[type=range]{width:100%}
+.kpi-row{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin:16px 0 8px;
+}
+.kpi{
+  background:#f8efe1;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:14px;
+}
+.kpi .lab{
+  font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;
+}
+.kpi .num{
+  font-family:var(--serif);font-size:25px;letter-spacing:-.04em;margin-top:2px;
+}
+.matrix{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin:26px 0;
+}
+.mcard{
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+  background:rgba(255,250,240,.7);
+}
+.mcard .tag{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.08em;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+.mcard strong{
+  display:block;
+  font-family:var(--serif);
+  font-size:21px;
+  margin:6px 0;
+}
+.sourcebox{
+  font-size:13px;color:var(--muted);
+  border-top:1px solid var(--line);
+  padding-top:14px;
+  margin-top:12px;
+}
+.sourcebox a{color:var(--blue)}
+.side-note{
+  display:grid;
+  grid-template-columns:120px 1fr;
+  gap:18px;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:18px 0;
+  margin:32px 0;
+}
+.side-note .label{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  color:var(--red);
+}
+.side-note .txt{
+  font-size:16px;
+  color:#3b352c;
+}
+.risk-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:15px;
+  margin:24px 0;
+  background:rgba(255,250,240,.6);
+  border:1px solid var(--line);
+}
+.risk-table th,.risk-table td{
+  border-bottom:1px solid var(--line);
+  padding:12px 14px;
+  vertical-align:top;
+}
+.risk-table th{
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  text-align:left;
+}
+.risk-table tr:last-child td{border-bottom:0}
+.quote{
+  font-family:var(--serif);
+  font-size:25px;
+  line-height:1.32;
+  color:#2d271f;
+  border-left:3px solid var(--gold);
+  padding-left:18px;
+  margin:36px 0;
+}
+.footer{
+  margin-top:80px;
+  border-top:1px solid var(--line);
+  padding-top:30px;
+  color:var(--muted);
+  font-size:13px;
+}
+@media(max-width:920px){
+  .hero{grid-template-columns:1fr;padding-top:44px}
+  .hero-card{min-height:320px}
+  .grid{grid-template-columns:1fr}
+  .toc{position:relative;top:auto;display:none}
+  .article{max-width:100%}
+  .full{width:100%;transform:none}
+  .controls,.kpi-row{grid-template-columns:1fr 1fr}
+  .matrix{grid-template-columns:1fr}
+  .side-note{grid-template-columns:1fr;gap:8px}
+}
+@media(max-width:560px){
+  .controls,.kpi-row{grid-template-columns:1fr}
+  .article p{font-size:17px}
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="brand">Materia Brief</div>
+  <div class="issue">Interactive supply-chain essay</div>
+</div>
+
+<section class="hero">
+  <div>
+    <div class="kicker">Energy shock / Materials transmission</div>
+    <h1>호르무즈의 불안은 어떻게 반도체와 배터리 가격이 되는가</h1>
+    <div class="dek">이란·미국 갈등은 석유화학 제품만의 문제가 아니다. 병목은 원유에서 시작하지만, 충격은 전력·가스·공정화학·운송보험·광물 금융비용을 타고 반도체와 이차전지의 원가표 안으로 스며든다.</div>
+    <div class="meta">
+      <span class="pill">Materia Flow No. 01</span>
+      <span class="pill">Semiconductor × Battery</span>
+      <span class="pill">Scenario tool included</span>
+    </div>
+  </div>
+
+  <aside class="hero-card">
+    <div class="hero-card-content">
+      <div class="big-num">20m</div>
+      <div class="caption">2024년 호르무즈 해협을 통과한 석유 흐름은 하루 평균 약 2,000만 배럴로, 전 세계 석유 액체 소비의 약 20%에 해당한다.</div>
+      <div class="mini-grid">
+        <div class="mini"><div class="lab">Oil chokepoint</div><div class="val">Hormuz</div></div>
+        <div class="mini"><div class="lab">Transmission</div><div class="val">Energy → Materials</div></div>
+        <div class="mini"><div class="lab">Semi exposure</div><div class="val">Chemicals</div></div>
+        <div class="mini"><div class="lab">Battery exposure</div><div class="val">Metals + polymers</div></div>
+      </div>
+    </div>
+  </aside>
+</section>
+
+<main class="wrap">
+  <div class="grid">
+    <nav class="toc">
+      <a href="#thesis">Thesis</a>
+      <a href="#map">Interactive map</a>
+      <a href="#semi">Semiconductor</a>
+      <a href="#battery">Battery</a>
+      <a href="#simulation">Simulation</a>
+      <a href="#playbook">Playbook</a>
+    </nav>
+
+    <article class="article">
+      <section id="thesis">
+        <p class="lead">시장 참가자는 지정학을 원유 차트로 읽는다. 기업은 그것을 원가표로 읽어야 한다.</p>
+
+        <p class="dropcap">중동 리스크가 커질 때 첫 화면에 뜨는 것은 언제나 유가다. 하지만 제조업의 실제 손익계산서는 더 느리게, 더 넓게 반응한다. 원유 가격이 올라가면 나프타와 방향족, 전력과 가스, 운임과 보험료가 같이 움직인다. 이 중 일부는 석유화학제품 가격으로 바로 보이지만, 일부는 반도체 공장의 공정 화학물질, 배터리 셀의 전해액·바인더·분리막, 그리고 금속 제련 비용 안으로 들어간다.</p>
+
+        <p>따라서 질문은 “유가가 얼마나 오르나”가 아니라 “어느 산업의 어떤 소재 노드가 유가 충격을 흡수하지 못하고 다음 단계로 넘기나”가 된다. 반도체와 배터리는 둘 다 첨단산업이지만 충격을 받는 방식은 다르다. 반도체는 <strong>공정 연속성과 초고순도 소재</strong>가 약점이고, 배터리는 <strong>광물·전해액·에너지 집약적 제련</strong>이 약점이다.</p>
+
+        <div class="note">이 글의 목적은 가격 예측이 아니다. 공급망이 어디서 굽고, 어디서 끊기며, 어디서 비용으로 전가되는지를 보는 것이다.</div>
+
+        <p>이 경로를 조금 더 세밀하게 보면 세 개의 시간이 겹친다. 첫째는 시장의 시간이다. 원유 선물, LNG, 운임, 보험료는 뉴스가 나오는 즉시 반응한다. 둘째는 구매의 시간이다. 소재업체와 부품사는 장기계약, 분기 단가, 재고 정책 때문에 충격을 바로 반영하지 않는다. 셋째는 공장의 시간이다. 공정 조건과 승인된 소재 목록은 쉽게 바뀌지 않기 때문에, 대체품이 있어도 실제 투입까지는 테스트와 인증의 시간이 필요하다.</p>
+
+        <p>그래서 지정학적 사건은 처음에는 가격 차트처럼 보이지만, 시간이 지나면 <strong>조달 리드타임, 안전재고, 승인 공급처, 대체 소재의 검증 기간</strong>이라는 운영 언어로 바뀐다. 특히 반도체와 배터리는 “아무 소재나 쓰면 되는 산업”이 아니기 때문에, 원자재 가격보다 더 중요한 것은 소재의 <strong>qualified supply</strong>, 즉 실제 공정에 들어갈 수 있는 검증된 공급망이다.</p>
+
+        <div class="side-note">
+          <div class="label">Reading frame</div>
+          <div class="txt">이 글은 이란·미국 갈등을 군사 이벤트가 아니라 산업 원가와 공급망의 스트레스 테스트로 읽는다. 원유가 오르면 어떤 소재가 오르는지보다, 어느 노드가 재고와 대체 공급처 없이 충격을 다음 단계로 넘기는지가 핵심이다.</div>
+        </div>
+
+      </section>
+
+      <section id="map" class="full panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">충격은 직선이 아니라 네트워크로 이동한다</div>
+            <div class="panel-sub">아래 Sankey는 에너지·운송 충격이 반도체와 배터리 소재 노드로 전이되는 주요 경로를 단순화한 것이다. 두꺼운 선일수록 비용 또는 공급망 노출도가 큰 경로다.</div>
+          </div>
+        </div>
+        <div id="networkChart" class="chart"></div>
+        <div class="sourcebox">Source notes: EIA와 IEA의 호르무즈 해협 에너지 흐름 자료, SIA/SEMI의 반도체 소재 공급망 설명, IEA/USGS의 배터리 광물 자료를 바탕으로 구성한 개념도.</div>
+      </section>
+
+      <section id="semi">
+        <h2>반도체: 기름보다 중요한 것은 “끊기면 안 되는 화학물질”이다</h2>
+        <p>반도체 제조는 웨이퍼와 장비만으로 돌아가지 않는다. 노광, 식각, 세정, 증착을 거치는 동안 수많은 특수가스와 습식화학물질, 포토레지스트, 용매, 슬러리가 들어간다. SIA는 반도체 제조 소재의 예로 웨이퍼, 포토레지스트 화학물질, 포토마스크, 가스, 습식 화학물질, 기판, 리드프레임 등을 든다. 또 미국 반도체 제조사는 이러한 소재 상당수를 대만, 일본, 한국, 중국 공급자에 의존한다고 설명한다.</p>
+
+        <p>여기서 유가의 역할은 원재료 가격 그 자체보다 <strong>공정 안정성의 배경비용</strong>에 가깝다. 세정제·용매·폴리머계 소재는 석유화학 밸류체인에 기대고, 초고순도 가스와 화학물질은 정제·증류·저장·운송의 에너지 비용에 민감하다. 한편 LNG 가격은 팹의 전력·유틸리티 비용에도 간접적으로 연결된다.</p>
+
+        <div class="matrix">
+          <div class="mcard"><div class="tag">Most visible</div><strong>물류·보험료</strong><p>해상 리스크가 커지면 운임과 보험료가 먼저 움직인다. 반도체 소재는 고가·고순도·정시성이 중요해 작은 지연도 재고정책을 바꾼다.</p></div>
+          <div class="mcard"><div class="tag">Less visible</div><strong>공정 화학물질</strong><p>포토레지스트, 용매, 세정액, 식각가스는 단순 원유제품은 아니지만 에너지·석유화학 체인에서 완전히 분리되어 있지 않다.</p></div>
+        </div>
+
+        <p>반도체 소재의 위험은 대개 양이 아니라 <strong>품질과 시간</strong>에서 나온다. 포토레지스트 한 품목의 구매 금액이 전체 원가에서 압도적으로 크지 않더라도, 해당 레지스트가 특정 노광 조건과 식각 프로파일에 맞춰 검증되어 있다면 대체는 느리다. 습식 세정액이나 식각가스도 마찬가지다. 소재가 몇 퍼센트 비싸지는 것보다, 수율이 흔들리거나 라인이 멈추는 것이 훨씬 더 큰 비용이다.</p>
+
+        <p>중동 긴장이 반도체에 미치는 영향은 따라서 “원유 → 포토레지스트 가격” 같은 단선적 경로보다 넓다. 첫째, 항로 위험이 커지면 고순도 화학물질과 장비 부품의 국제 운송 일정이 흔들린다. 둘째, 에너지 가격은 초고순도 정제와 증류, 클린룸 유틸리티, 산업가스 생산 비용을 자극한다. 셋째, 고객사와 팹은 불확실성이 커질 때 재고를 더 쌓고, 이 과정에서 이미 좁은 소재 시장의 수급을 더 빡빡하게 만들 수 있다.</p>
+
+        <table class="risk-table">
+          <thead><tr><th>반도체 노드</th><th>중동 리스크의 전이 경로</th><th>기업이 봐야 할 질문</th></tr></thead>
+          <tbody>
+            <tr><td>Photoresist / solvent</td><td>석유화학 원료, 용매, 운송 지연, 승인 공급처 제한</td><td>대체 소재가 실제 공정에서 승인되어 있는가?</td></tr>
+            <tr><td>Wet chemicals</td><td>정제·증류 에너지 비용, 초고순도 품질관리, 물류 비용</td><td>안전재고는 며칠치이며, 긴급 운송 시 비용은 얼마인가?</td></tr>
+            <tr><td>Specialty gases</td><td>전력·가스 비용, 실린더/벌크 운송, 지정학적 통제 가능성</td><td>단일 국가 또는 단일 공급사 의존도가 높은가?</td></tr>
+            <tr><td>Fab operation</td><td>전력 가격, 유틸리티, 보험, 재고 금융비용</td><td>에너지 비용 상승분이 제품 단가에 얼마나 전가되는가?</td></tr>
+          </tbody>
+        </table>
+
+        <div class="quote">반도체에서 가장 비싼 리스크는 소재 가격 상승이 아니라, 검증된 소재가 제때 도착하지 않는 상황이다.</div>
+
+      </section>
+
+      <section id="battery">
+        <h2>배터리: 광물의 산업이면서 동시에 에너지의 산업이다</h2>
+        <p>배터리는 반도체보다 원자재 충격이 더 직접적이다. 리튬, 니켈, 코발트, 흑연, 구리, 알루미늄이 셀과 팩의 물리적 구조를 이룬다. 2024년에는 리튬 가격이 큰 폭으로 하락했고, 니켈·코발트·흑연도 약세를 보였지만, 이것이 공급망 리스크가 사라졌다는 뜻은 아니다. 가격이 낮아진 시기에는 프로젝트 투자가 지연되고, 다음 수요 회복기에는 공급 병목이 더 크게 돌아올 수 있다.</p>
+
+        <p>이란·미국 갈등이 배터리에 미치는 경로는 두 갈래다. 첫째, 유가·가스·전력 비용은 광산, 정련, 제련, 양극재·음극재 공정의 비용을 밀어 올린다. 둘째, 운송과 금융비용은 재고를 보수적으로 만들고, 특히 공급처가 집중된 소재의 리스크 프리미엄을 높인다.</p>
+
+        <p>배터리 공급망은 “광산에서 셀까지”의 경로가 길다. 광석은 정광이 되고, 정광은 정련을 거쳐 배터리급 화합물이 되며, 다시 전구체와 양극재, 전해액, 분리막, 셀 조립으로 이어진다. 이 중 많은 단계는 전력·열·화학약품을 많이 쓴다. 따라서 유가가 직접 리튬 가격을 결정하지 않더라도, 에너지 비용은 정련과 소재 제조의 바닥 비용을 바꾼다.</p>
+
+        <p>또 하나의 차이는 재고의 성격이다. 배터리 금속은 거래소 가격과 장기계약 가격이 있고, 셀 업체는 일정 수준의 재고와 장기 조달 계약을 둔다. 그래서 충격은 당일 가격표에 모두 반영되지 않는다. 그러나 불확실성이 길어지면 구매자는 더 긴 커버리지를 원하고, 공급자는 리스크 프리미엄을 붙인다. 이때 실제 비용 상승은 원재료 단가뿐 아니라 <strong>재고 금융비용, 선적 조건, 보험, 환율, 공급계약 재협상</strong>으로 나타난다.</p>
+
+        <table class="risk-table">
+          <thead><tr><th>배터리 노드</th><th>주요 소재</th><th>중동 리스크의 전이 방식</th></tr></thead>
+          <tbody>
+            <tr><td>Cathode</td><td>리튬, 니켈, 코발트, 망간</td><td>정련 에너지 비용, 광물 가격 심리, 금융비용, 장기계약 재협상</td></tr>
+            <tr><td>Anode</td><td>천연/인조흑연</td><td>고온 처리 전력비, 중국 중심 가공 의존도, 운송 리스크</td></tr>
+            <tr><td>Electrolyte</td><td>LiPF6, carbonate solvents</td><td>불소화학, 유기용매, 석유화학 원료, 안전 운송 비용</td></tr>
+            <tr><td>Pack structure</td><td>알루미늄, 구리, steel, plastics</td><td>제련 전력비, 금속 가격, 고분자 원료, 운임</td></tr>
+          </tbody>
+        </table>
+
+        <p>반도체와 비교하면 배터리의 민감도는 더 “원자재적”이다. 리튬, 니켈, 코발트, 흑연 가격이 움직이면 셀 원가에 바로 보인다. 그러나 동시에 배터리는 소재 믹스와 화학계 변화로 충격을 흡수할 수 있다. 예컨대 LFP 확대는 니켈·코발트 의존도를 낮추지만, 리튬과 인산철, 흑연, 전해액, 팩 구조의 중요성은 여전히 남긴다. 즉 리스크가 사라지는 것이 아니라 <strong>다른 소재로 이동</strong>한다.</p>
+
+      </section>
+
+      <section id="simulation" class="full panel">
+        <div class="panel-head">
+          <div>
+            <div class="panel-title">가격 충격 시뮬레이터</div>
+            <div class="panel-sub">슬라이더를 움직이면 에너지 충격이 반도체와 배터리의 비용 압력으로 어떻게 다르게 전이되는지 볼 수 있다. 숫자는 설명용 모델이며 실제 견적이 아니다.</div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <div class="control"><label>Oil / Naphtha <span id="oilVal">25%</span></label><input id="oil" type="range" min="0" max="120" value="25"></div>
+          <div class="control"><label>LNG / Power <span id="gasVal">20%</span></label><input id="gas" type="range" min="0" max="120" value="20"></div>
+          <div class="control"><label>Freight / Insurance <span id="freightVal">35%</span></label><input id="freight" type="range" min="0" max="150" value="35"></div>
+          <div class="control"><label>Critical minerals <span id="mineralVal">15%</span></label><input id="mineral" type="range" min="-30" max="120" value="15"></div>
+        </div>
+
+        <div class="kpi-row">
+          <div class="kpi"><div class="lab">Semi cost pressure</div><div class="num" id="semiKpi">—</div></div>
+          <div class="kpi"><div class="lab">Battery cost pressure</div><div class="num" id="batteryKpi">—</div></div>
+          <div class="kpi"><div class="lab">Dominant semi channel</div><div class="num" id="semiDominant">—</div></div>
+          <div class="kpi"><div class="lab">Dominant battery channel</div><div class="num" id="batteryDominant">—</div></div>
+        </div>
+
+        <div id="impactChart" class="chart"></div>
+        <div class="sourcebox">Model logic: 반도체는 공정화학·전력·물류 전이를 높게, 배터리는 광물·전해액/폴리머·전력 전이를 높게 가중했다. 기업별 원가 구조가 아닌 교육용 민감도 모델이다.</div>
+      </section>
+
+      <section id="playbook">
+        <h2>기업이 봐야 할 것은 “원유 가격”이 아니라 “소재별 전이율”이다</h2>
+
+        <h3>1. 반도체 기업 또는 부품사는 소재별 재고 커버리지를 봐야 한다</h3>
+        <p>포토레지스트, 특수가스, 습식화학물질은 단순히 가격이 조금 오르는 문제가 아니다. 품질 규격이 맞지 않으면 대체가 느리다. 따라서 핵심 질문은 “대체 공급처가 있는가”보다 “검증된 대체 공급처가 있는가”다.</p>
+
+        <h3>2. 배터리 기업은 금속 가격보다 정련 병목을 봐야 한다</h3>
+        <p>리튬·니켈·코발트 가격은 매일 보이지만, 실제 병목은 정련·전구체·양극재·흑연 가공에서 생긴다. 특히 에너지 가격이 오르면 채굴보다 정련·제련 비용이 먼저 민감하게 반응할 수 있다.</p>
+
+        <h3>3. 자동차 부품사는 BOM을 원자재 언어로 다시 써야 한다</h3>
+        <p>부품명으로 된 BOM은 구매팀의 언어다. 위기 때 필요한 것은 소재와 원자재의 언어다. 알루미늄, 구리, 에폭시, 폴리이미드, 니켈, 흑연이 어느 부품에 얼마나 들어가는지 알아야 충격이 제품 원가로 전이되는 경로를 볼 수 있다.</p>
+
+        <div class="note">Materia Flow의 핵심 문장: 제품은 부품의 조립품이지만, 리스크는 원자재의 네트워크에서 발생한다.</div>
+
+        <h3>4. 구매 전략은 가격 예측보다 충격 흡수력으로 설계해야 한다</h3>
+        <p>실무에서 가장 위험한 접근은 “유가가 얼마까지 오를까”만 묻는 것이다. 가격 예측은 틀릴 수 있지만, 구조는 더 오래 간다. 어떤 소재가 단일국가 의존인지, 어떤 소재가 고객 승인 변경이 어려운지, 어떤 소재가 재고를 쌓기 어려운 위험물인지, 어떤 공정이 전력비에 민감한지를 먼저 봐야 한다.</p>
+
+        <h3>5. 콘텐츠와 컨설팅의 연결점</h3>
+        <p>이런 인터랙티브 뉴스레터는 단순한 글이 아니라 고객 대화의 입구가 된다. 독자는 슬라이더를 움직이며 “우리 제품에서는 어느 소재가 이 역할을 하지?”라고 묻게 된다. 그 순간 뉴스레터는 마케팅이 아니라 진단 도구가 된다.</p>
+
+        <div class="matrix">
+          <div class="mcard"><div class="tag">Consulting question</div><strong>우리 제품의 충격 전이율은?</strong><p>BOM을 소재 언어로 바꾸고, 소재별 가격·공급·대체 리스크를 연결하면 제품별 취약도를 계산할 수 있다.</p></div>
+          <div class="mcard"><div class="tag">Product idea</div><strong>Materia Flow Simulator</strong><p>원자재 가격, 에너지 비용, 운임, 공급망 리스크를 슬라이더로 바꾸면 제품 원가와 리스크 점수가 바뀌는 SaaS형 분석 페이지로 확장할 수 있다.</p></div>
+        </div>
+
+      </section>
+
+      <section class="footer">
+        <strong>Sources & reading notes</strong><br>
+        EIA, IEA, USGS, SIA, SEMI, uploaded EV battery disassembly research. This article is an analytical scenario essay, not a price forecast or investment advice.
+      </section>
+    </article>
+  </div>
+</main>
+
+<script>
+const beige = "#f6f1e7", ink="#171511", muted="#686052", red="#a33d2d", blue="#255a73", green="#516f45", gold="#b37818";
+
+function plotNetwork(){
+  const labels = [
+    "Hormuz risk","Oil/Naphtha","LNG/Power","Freight/Insurance",
+    "Petrochemicals","High-purity chemicals","Specialty gases","Photoresist/Solvents",
+    "Semiconductor fabs","Battery electrolyte","Binder/Separator polymers",
+    "Critical minerals","Refining/precursors","Battery cells","EV supply chain"
+  ];
+  const source = [0,0,0,1,1,2,2,3,3,4,4,5,6,7,11,11,12,9,10,13];
+  const target = [1,2,3,4,9,5,12,5,13,7,10,8,8,8,12,13,13,13,13,14];
+  const value  = [9,7,6,7,3,5,4,4,4,5,4,6,4,5,7,8,6,4,3,8];
+  const colors = labels.map((_,i)=> i===0 ? red : (i<4 ? gold : (i<9 ? blue : green)));
+  Plotly.newPlot("networkChart", [{
+    type:"sankey",
+    arrangement:"snap",
+    node:{ label:labels, pad:18, thickness:17, color:colors, line:{color:"rgba(0,0,0,.18)",width:.5}},
+    link:{ source, target, value, color:source.map(s=> s===0?"rgba(163,61,45,.23)": s<4?"rgba(179,120,24,.20)": "rgba(37,90,115,.16)") }
+  }], {
+    margin:{l:10,r:10,t:10,b:10},
+    paper_bgcolor:"rgba(0,0,0,0)",
+    plot_bgcolor:"rgba(0,0,0,0)",
+    font:{family:"-apple-system, BlinkMacSystemFont, Segoe UI, Noto Sans KR, sans-serif", size:12, color:ink}
+  }, {displayModeBar:false, responsive:true});
+}
+
+function getInputs(){
+  return {
+    oil:+document.getElementById("oil").value,
+    gas:+document.getElementById("gas").value,
+    freight:+document.getElementById("freight").value,
+    mineral:+document.getElementById("mineral").value
+  }
+}
+
+function updateSimulation(){
+  const x = getInputs();
+  document.getElementById("oilVal").textContent=x.oil+"%";
+  document.getElementById("gasVal").textContent=x.gas+"%";
+  document.getElementById("freightVal").textContent=x.freight+"%";
+  document.getElementById("mineralVal").textContent=x.mineral+"%";
+
+  const semi = {
+    "공정 화학물질": x.oil*0.11 + x.freight*0.04,
+    "특수가스/전력": x.gas*0.10,
+    "운송·보험": x.freight*0.08,
+    "광물·금속": x.mineral*0.025
+  };
+  const battery = {
+    "전해액·폴리머": x.oil*0.09 + x.gas*0.02,
+    "정련·전력": x.gas*0.09,
+    "운송·보험": x.freight*0.055,
+    "광물·금속": x.mineral*0.16
+  };
+
+  const semiTotal = Object.values(semi).reduce((a,b)=>a+b,0);
+  const batTotal = Object.values(battery).reduce((a,b)=>a+b,0);
+  document.getElementById("semiKpi").textContent = semiTotal.toFixed(1)+"%";
+  document.getElementById("batteryKpi").textContent = batTotal.toFixed(1)+"%";
+  document.getElementById("semiDominant").textContent = Object.entries(semi).sort((a,b)=>b[1]-a[1])[0][0];
+  document.getElementById("batteryDominant").textContent = Object.entries(battery).sort((a,b)=>b[1]-a[1])[0][0];
+
+  Plotly.react("impactChart", [
+    {
+      type:"bar",
+      name:"반도체",
+      x:Object.keys(semi),
+      y:Object.values(semi),
+      marker:{color:blue},
+      hovertemplate:"%{x}<br>비용압력: %{y:.1f}%<extra></extra>"
+    },
+    {
+      type:"bar",
+      name:"배터리",
+      x:Object.keys(battery),
+      y:Object.values(battery),
+      marker:{color:green},
+      hovertemplate:"%{x}<br>비용압력: %{y:.1f}%<extra></extra>"
+    }
+  ], {
+    barmode:"group",
+    margin:{l:40,r:20,t:20,b:90},
+    paper_bgcolor:"rgba(0,0,0,0)",
+    plot_bgcolor:"rgba(0,0,0,0)",
+    font:{family:"-apple-system, BlinkMacSystemFont, Segoe UI, Noto Sans KR, sans-serif", color:ink},
+    yaxis:{title:"Estimated cost pressure (%)", gridcolor:"rgba(23,21,17,.12)", zerolinecolor:"rgba(23,21,17,.25)"},
+    xaxis:{tickangle:-22},
+    legend:{orientation:"h", y:1.12}
+  }, {displayModeBar:false, responsive:true});
+}
+
+["oil","gas","freight","mineral"].forEach(id=>document.getElementById(id).addEventListener("input", updateSimulation));
+plotNetwork();
+updateSimulation();
+</script>
+</body>
+</html>
